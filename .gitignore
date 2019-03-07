@@ -1,0 +1,10 @@
+CodeReview/
+Data/
+Embedding_Results/
+Evaluation/
+GEM/
+env/
+slurm/
+*.pyc
+
+
