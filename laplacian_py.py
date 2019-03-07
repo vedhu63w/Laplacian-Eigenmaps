@@ -69,15 +69,19 @@ loss = (pos_sim + 1*neg_sim)'''
 #embed_matrix = tf.Variable(tf.random_uniform([num_nodes, embed_size], -1*init_range, init_range, dtype=tf.float32))
 #lap = 
 lambda_reg = 100
-reg = tf.reduce_mean(tf.square(tf.diag_part(tf.matmul(embed_matrix,tf.transpose(embed_matrix) ) - tf.eye(adjmat.shape[0]) )))
-pos_loss = tf.reduce_mean(tf.diag_part(tf.matmul(tf.matmul(tf.transpose(embed_matrix),laplacian),embed_matrix))) + lambda_reg* reg
-neg_loss = -1*tf.reduce_mean(tf.diag_part(tf.matmul(tf.matmul(tf.transpose(embed_matrix),comp_laplacian),embed_matrix)))
+reg = tf.reduce_mean(tf.square(tf.diag_part(tf.matmul(embed_matrix,tf.transpose(embed_matrix) )
+                                             - tf.eye(adjmat.shape[0]) )))
+pos_loss = tf.reduce_mean(tf.diag_part(tf.matmul(tf.matmul(tf.transpose(embed_matrix),laplacian),
+                                                            embed_matrix))) + lambda_reg* reg
+neg_loss = -1*tf.reduce_mean(tf.diag_part(tf.matmul(tf.matmul(tf.transpose(embed_matrix),comp_laplacian),
+                                                                                embed_matrix)))
 loss = pos_loss + neg_loss
 optimizer_1 = tf.train.AdamOptimizer(args.lr1).minimize(pos_loss)
 optimizer_2 = tf.train.AdamOptimizer(args.lr2).minimize(neg_loss)
 
 # Get embeddings
-get_embed = tf.nn.l2_normalize(embed_matrix, axis=1)
+# get_embed = tf.nn.l2_normalize(embed_matrix, axis=1)
+get_embed = embed_matrix
 
 num_epochs = 0
 sess = tf.Session()

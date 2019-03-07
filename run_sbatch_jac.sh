@@ -6,7 +6,7 @@
 #SBATCH --mem 100000
 
 cd $HOME/Eigenmaps/
-mycommand="python -W ignore gem_eigenmaps.py --dataset paper-cite --dimension 256"
+mycommand="python -W ignore gem_eigenmaps_jac.py --dataset blogcatalog --dimension 500"
 # mycommand="python -W ignore cost_eigenmaps_unconstrained.py --dataset texas --dimension 128 --cost num_lap"
 echo $mycommand
 $mycommand
